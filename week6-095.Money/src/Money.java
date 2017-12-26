@@ -22,6 +22,30 @@ public class Money {
     public int cents() {
         return cents;
     }
+    
+    public boolean less(Money compared){
+        if(this.euros<compared.euros){
+            return true;
+        } else if(this.euros == compared.euros){
+            return this.cents < compared.cents;
+        } else{
+            return false;
+        }
+    }
+    
+    public Money plus(Money money){
+        return new Money(money.euros+this.euros, money.cents+this.cents);
+    }
+    
+    public Money minus(Money money){
+        if(this.less(money)){
+            return new Money(0, 0);
+        } else if(this.cents<money.cents){
+            return new Money((this.euros-money.euros)-1, (100-money.cents));
+        } else{
+            return new Money(this.euros-money.euros, this.cents-money.cents);
+        }
+    }
 
     @Override
     public String toString() {
