@@ -29,5 +29,31 @@ public class MyDate {
 
         return false;
     }
+    
+    public int differenceInYears(MyDate comparedDate){
+        
+        
+        
+        int daysComparedDate = calculateDaysInDate(comparedDate);
+        int thisComparedDate = calculateDaysInDate(this);
+       
+        if(Math.abs((daysComparedDate-thisComparedDate))<365){
+            return 0;
+        }
+        else{
+            return Math.abs(daysComparedDate-thisComparedDate)/365;
+        }
+    }
 
+    public int calculateDaysInDate(MyDate date){
+        int daysInMonths = 0;
+        int daysInYears = 0;
+        for(int i = 0; i < date.month; i++){
+            daysInMonths += 30;
+        }
+        for(int i = 0; i < date.year - 1; i++){
+            daysInYears += 365;
+        }
+        return daysInMonths + daysInYears + date.day;
+    }
 }

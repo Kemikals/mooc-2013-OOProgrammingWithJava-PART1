@@ -9,21 +9,39 @@ public class Person {
         this.birthday = new MyDate(pp, kk, vv);
     }
     
+    public Person(String name, MyDate birthday){
+        this.name = name;
+        this.birthday = birthday;
+    }
+    
+    public Person(String name){
+        this.name = name;
+        int todaysDay = Calendar.getInstance().get(Calendar.DATE);
+       int todaysMonth = Calendar.getInstance().get(Calendar.MONTH) + 1; // January is 0 so we add one
+       int todaysYear = Calendar.getInstance().get(Calendar.YEAR);
+       
+       this.birthday = new MyDate(todaysDay, todaysMonth, todaysYear);
+    }
+    
     
     public int age() {
-// calculate the age based on the birthday and the current day
-        // you get the current day as follows: 
-        // Calendar.getInstance().get(Calendar.DATE);
-        // Calendar.getInstance().get(Calendar.MONTH) + 1; // January is 0 so we add one
-        // Calendar.getInstance().get(Calendar.YEAR);
-        return 0;
+       
+       int todaysDay = Calendar.getInstance().get(Calendar.DATE);
+       int todaysMonth = Calendar.getInstance().get(Calendar.MONTH) + 1; // January is 0 so we add one
+       int todaysYear = Calendar.getInstance().get(Calendar.YEAR);
+       
+       MyDate today = new MyDate(todaysDay, todaysMonth, todaysYear);
+       
+        return this.birthday.differenceInYears(today);
     }
     
     public boolean olderThan(Person compared) {
-        // compare the ages based on birthdays
-        return false;
+        if(this.birthday.earlier(compared.birthday)){
+        return true;
+    } else{
+            return false;
+        }
     }
-    
     public String getName() {
         return this.name;
     }
