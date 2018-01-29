@@ -9,8 +9,8 @@
  * @author Anthony
  */
 public class Bird {
-    private String name;
-    private String latinName;
+    private final String name;
+    private final String latinName;
     private int timesObserved;
     
     public Bird(String name, String latinName){
@@ -42,6 +42,11 @@ public class Bird {
     
     public void observed(){
         this.timesObserved++;
+    }
+    
+    @Override
+    public String toString(){
+        return this.name + " (" + this.latinName + ") : " + this.timesObserved + " observations";
     }
     
 }

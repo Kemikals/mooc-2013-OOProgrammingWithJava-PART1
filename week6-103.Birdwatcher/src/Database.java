@@ -10,37 +10,49 @@
  */
 import java.util.ArrayList;
 public class Database {
-    ArrayList<Bird> birds;
+    private ArrayList<Bird> birds;
     
     public Database(){
         birds = new ArrayList<Bird>();
     }
     
     public void addBird(String name, String latinName){
-        birds.add(new Bird(name, latinName));
+        getBirds().add(new Bird(name, latinName));
         
     }
     
     public void observe(String name){
+       int indexOfBirdName =  indexOfBirdName(name);
+        if(indexOfBirdName != -1){
+            getBirds().get(indexOfBirdName).observed();
         
-        if(exists(name)){
-            
+    } else{
+            System.out.println("Is not a bird!");
         }
         
     }
+
+    
+
+    public int indexOfBirdName(String name){
+        int indexOfBirdName = -1;
+        int index = 0;
+        for(Bird b: getBirds()){
+            if(b.getName().toLowerCase().equals(name.toLowerCase())){
+                indexOfBirdName = index;
+                break;
+            }else{
+                indexOfBirdName = -1;
+                }
+            index++;
+        } 
         
+    return indexOfBirdName;
+}
+    public ArrayList<Bird> getBirds() {
+        return birds;
+    }
     
-    
-    
-    public boolean exists(String name){
-        for(Bird b: birds){
-            if(b.getName().trim().toLowerCase().equalsIgnoreCase(name.trim().toLowerCase())){
-                return true;
-            } else{
-                return false;
-            }
-        }
-        return false;
-    } 
+   
     
 }
